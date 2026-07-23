@@ -8,7 +8,12 @@ def mask_account_card(data: str) -> str:
     Маскирует номер карты или счета.
     """
 
-    name, number = data.rsplit(" ", 1)
+    parts = data.rsplit(" ", 1)
+
+    if len(parts) != 2:
+        raise ValueError("Некорректный формат данных.")
+
+    name, number = parts
 
     if name == "Счет":
         return f"{name} {get_mask_account(number)}"
