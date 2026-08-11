@@ -83,7 +83,7 @@ for transaction in filter_by_currency(transactions, "USD"):
     
 # Получение описаний транзакций 
 for description in transaction_descriptions(transactions): 
-    print(description) 
+    print(description)
     
 # Генерация номеров банковских карт 
 for card_number in card_number_generator(1, 5): 
