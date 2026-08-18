@@ -26,10 +26,7 @@ def test_log_error_console(capsys):
 
     captured = capsys.readouterr()
 
-    assert (
-        captured.out
-        == "divide error: ZeroDivisionError. Inputs: (1, 0), {}\n"
-    )
+    assert captured.out == "divide error: ZeroDivisionError. Inputs: (1, 0), {}\n"
 
 
 def test_log_success_file(tmp_path):
@@ -55,7 +52,4 @@ def test_log_error_file(tmp_path):
     with pytest.raises(ZeroDivisionError):
         divide(1, 0)
 
-    assert (
-        log_file.read_text(encoding="utf-8")
-        == "divide error: ZeroDivisionError. Inputs: (1, 0), {}\n"
-    )
+    assert log_file.read_text(encoding="utf-8") == "divide error: ZeroDivisionError. Inputs: (1, 0), {}\n"
