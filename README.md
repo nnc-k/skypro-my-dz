@@ -11,6 +11,9 @@
 - определение типа платежного инструмента (карта или счет);
 - форматирование даты;
 - фильтрация и сортировка банковских операций.
+- фильтрация транзакций по валюте;
+- получение описаний транзакций;
+- генерация номеров банковских карт в заданном диапазоне.
 
 ---
 
@@ -60,14 +63,31 @@ pip install -r requirements.txt
 ```python
 from src.widget import mask_account_card, get_date
 
+# Маскировка номера банковской карты
 print(mask_account_card("Visa Platinum 7000792289606361"))
 # Visa Platinum 7000 79** **** 6361
 
+# Маскировка номера банковского счета
 print(mask_account_card("Счет 73654108430135874305"))
 # Счет **4305
 
+# Форматирование даты
 print(get_date("2024-03-11T02:26:18.671407"))
 # 11.03.2024
+
+from src.generators import ( filter_by_currency, transaction_descriptions, card_number_generator, ) 
+
+# Фильтрация транзакций по валюте 
+for transaction in filter_by_currency(transactions, "USD"): 
+    print(transaction) 
+    
+# Получение описаний транзакций 
+for description in transaction_descriptions(transactions): 
+    print(description)
+    
+# Генерация номеров банковских карт 
+for card_number in card_number_generator(1, 5): 
+    print(card_number)
 ```
 
 ---
