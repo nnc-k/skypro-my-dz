@@ -12,5 +12,5 @@ def read_json_file(file_path: str) -> list[dict]:
 
         return []
 
-    except (FileNotFoundError, json.JSONDecodeError):
+    except FileNotFoundError, json.JSONDecodeError:
         return []

@@ -15,7 +15,8 @@ def convert_to_rub(transaction: dict) -> float:
         return amount
 
     api_key = os.getenv("EXCHANGE_RATES_API_KEY")
-
+    if not api_key:
+        raise ValueError("EXCHANGE_RATES_API_KEY not set in environment")
 
     url = "https://api.apilayer.com/exchangerates_data/convert"
 

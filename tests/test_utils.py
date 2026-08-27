@@ -50,4 +50,3 @@ def test_read_json_file_invalid_json():
         result = read_json_file("operations.json")
 
     assert result == []
-

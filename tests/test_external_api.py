@@ -1,5 +1,8 @@
 from unittest.mock import Mock, patch
 
+import pytest
+import requests
+
 from src.external_api import convert_to_rub
 
 
