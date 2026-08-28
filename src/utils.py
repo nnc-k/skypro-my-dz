@@ -13,9 +13,7 @@ file_handler = logging.FileHandler(
     mode="w",
     encoding="utf-8",
 )
-file_formatter = logging.Formatter(
-    "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-)
+file_formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 file_handler.setFormatter(file_formatter)
 
 if not logger.handlers:
