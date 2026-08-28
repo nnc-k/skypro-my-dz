@@ -1,16 +1,17 @@
 import json
 import logging
-import os
+from pathlib import Path
 
-os.makedirs("logs", exist_ok=True)
+LOG_DIR = Path(__file__).resolve().parent.parent / "logs"
+LOG_DIR.mkdir(exist_ok=True)
 
 logger = logging.getLogger("utils")
 logger.setLevel(logging.DEBUG)
 
 file_handler = logging.FileHandler(
-    "logs/utils.log",
+    LOG_DIR / "utils.log",
     mode="w",
-    encoding="utf-8"
+    encoding="utf-8",
 )
 file_formatter = logging.Formatter(
     "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
@@ -31,7 +32,10 @@ def read_json_file(file_path: str) -> list[dict]:
             logger.info("JSON-файл %s успешно прочитан", file_path)
             return data
 
-        logger.error("JSON-файл %s содержит данные не в виде списка", file_path)
+        logger.error(
+            "JSON-файл %s содержит данные не в виде списка",
+            file_path,
+        )
         return []
 
     except FileNotFoundError:
@@ -39,5 +43,8 @@ def read_json_file(file_path: str) -> list[dict]:
         return []
 
     except json.JSONDecodeError:
-        logger.error("Ошибка декодирования JSON-файла %s", file_path)
+        logger.error(
+            "Ошибка декодирования JSON-файла %s",
+            file_path,
+        )
         return []
