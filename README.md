@@ -100,10 +100,21 @@ for card_number in card_number_generator(1, 5):
 При успешном выполнении функции записывается сообщение с её именем.
 При возникновении ошибки записываются имя функции, тип ошибки и входные параметры.
 ---
+## Новое: чтение CSV и Excel
+
+Добавлены функции для чтения финансовых транзакций из файлов CSV и Excel (.xlsx) в модуле `src/file_readers.py`:
+- `read_transactions_csv(file_path)` — читает CSV, возвращает список словарей.
+- `read_transactions_excel(file_path)` — читает Excel, возвращает список словарей.
+
+Пример:
+```python
+from src.file_readers import read_transactions_csv, read_transactions_excel
+csv_data = read_transactions_csv('data/transactions.csv')
+excel_data = read_transactions_excel('data/transactions_excel.xlsx')
 
 ## Проверка качества кода
 
-Проверка стиля кода:
+#Проверка стиля кода:
 
 ```bash
 poetry run flake8
