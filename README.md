@@ -112,6 +112,23 @@ from src.file_readers import read_transactions_csv, read_transactions_excel
 csv_data = read_transactions_csv('data/transactions.csv')
 excel_data = read_transactions_excel('data/transactions_excel.xlsx')
 
+
+## Новые функции обработки транзакций
+
+В модуле `src/processing.py` добавлены:
+- `filter_by_description(transactions, search_string)` – поиск транзакций по фразе в описании (регистронезависимо, с использованием регулярных выражений).
+- `count_by_category(transactions, categories)` – подсчёт количества транзакций по заданным категориям (поле `description`) с использованием `Counter`.
+
+## Пользовательский интерфейс
+
+Модуль `main.py` предоставляет консольное меню для:
+- выбора источника данных (JSON, CSV, XLSX);
+- фильтрации по статусу (EXECUTED, CANCELED, PENDING) с валидацией ввода;
+- сортировки по дате (по возрастанию/убыванию);
+- фильтрации рублёвых транзакций;
+- поиска по слову в описании;
+- вывода отформатированного списка транзакций.
+
 ## Проверка качества кода
 
 #Проверка стиля кода:
