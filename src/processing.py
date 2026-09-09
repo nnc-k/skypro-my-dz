@@ -1,3 +1,8 @@
+import re
+from collections import Counter
+from typing import Any, Dict, List
+
+
 def filter_by_state(data: list[dict], state: str = "EXECUTED") -> list[dict]:
     """
     Возвращает список словарей с указанным значением state.
@@ -16,9 +21,6 @@ def sort_by_date(data: list[dict], reverse: bool = True) -> list[dict]:
     :return: отсортированный список словарей.
     """
     return sorted(data, key=lambda item: item["date"], reverse=reverse)
-import re
-from collections import Counter
-from typing import List, Dict, Any
 
 
 def filter_by_description(transactions: List[Dict[str, Any]], search_string: str) -> List[Dict[str, Any]]:

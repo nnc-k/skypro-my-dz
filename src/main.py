@@ -1,8 +1,7 @@
-import sys
-from typing import List, Dict, Any
+from typing import List
 
-from src.processing import filter_by_state, sort_by_date, filter_by_description, count_by_category
 from src.file_readers import read_transactions_csv, read_transactions_excel
+from src.processing import filter_by_description, filter_by_state, sort_by_date
 from src.utils import read_json_file
 
 VALID_STATUSES = {"EXECUTED", "CANCELED", "PENDING"}
@@ -45,21 +44,26 @@ def main() -> None:
 
     # Фильтрация по статусу (используем существующую функцию)
     while True:
-        status = input("Введите статус, по которому необходимо выполнить фильтрацию.\n"
-                       "Доступные для фильтровки статусы: EXECUTED, CANCELED, PENDING\n").strip().upper()
+        status = (
+            input(
+                "Введите статус, по которому необходимо выполнить фильтрацию.\n"
+                "Доступные для фильтровки статусы: EXECUTED, CANCELED, PENDING\n"
+            )
+            .strip()
+            .upper()
+        )
         if status in VALID_STATUSES:
             break
-        print(f"Статус операции \"{status}\" недоступен.")
+        print(f'Статус операции "{status}" недоступен.')
 
     filtered = filter_by_state(transactions, state=status)
-    print(f"Операции отфильтрованы по статусу \"{status}\"")
+    print(f'Операции отфильтрованы по статусу "{status}"')
 
     # Сортировка по дате (используем существующую функцию)
     sort_choice = get_user_choice("Отсортировать операции по дате? Да/Нет: ", ["Да", "Нет"])
     if sort_choice == "Да":
-        order = get_user_choice("Отсортировать по возрастанию или по убыванию? ",
-                                ["по возрастанию", "по убыванию"])
-        reverse = (order == "по убыванию")
+        order = get_user_choice("Отсортировать по возрастанию или по убыванию? ", ["по возрастанию", "по убыванию"])
+        reverse = order == "по убыванию"
         filtered = sort_by_date(filtered, reverse=reverse)
 
     # Фильтр по рублёвым транзакциям
@@ -69,8 +73,9 @@ def main() -> None:
         filtered = [t for t in filtered if t.get("currency", {}).get("code") == "RUB"]
 
     # Поиск по описанию (новая функция)
-    desc_choice = get_user_choice("Отфильтровать список транзакций по определенному слову в описании? Да/Нет: ",
-                                  ["Да", "Нет"])
+    desc_choice = get_user_choice(
+        "Отфильтровать список транзакций по определенному слову в описании? Да/Нет: ", ["Да", "Нет"]
+    )
     if desc_choice == "Да":
         search_word = input("Введите слово для поиска: ").strip()
         filtered = filter_by_description(filtered, search_word)

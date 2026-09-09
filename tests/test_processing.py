@@ -1,9 +1,10 @@
 import pytest
+
 from src.processing import (
+    count_by_category,
+    filter_by_description,
     filter_by_state,
     sort_by_date,
-    filter_by_description,
-    count_by_category,
 )
 
 
